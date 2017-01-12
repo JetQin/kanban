@@ -1,11 +1,11 @@
 /**
  * Created by jet on 12/27/16.
  */
-import React from 'react';
+import React,{Component,PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import Card from './Card';
 
-class List extends React.Component{
+class List extends Component{
 
     render(){
         var cards = this.props.cards.map((card) => {
@@ -17,5 +17,10 @@ class List extends React.Component{
         );
     }
 }
+
+List.propTypes = {
+    title: PropTypes.string.isRequired,
+    cards: PropTypes.arrayOf(PropTypes.object)
+};
 
 export default List;

@@ -2,12 +2,14 @@
  * Created by jet on 12/27/16.
  */
 
+var webpack = require("webpack");
+var WebpackDevServer = require("webpack-dev-server");
 var fs   = require('fs');
 var path = require('path');
 
 
 const APPLICATION_PATH = {
-    ROOT:    path.resolve(__dirname,"app"),
+    ROOT:    path.join(__dirname,"app"),
     OUTPUT:  path.resolve(__dirname,"build"),
     TEST:    path.resolve(path.resolve(__dirname,"app"),"test")
 };
@@ -26,7 +28,7 @@ var entries =  fs.readdirSync(APPLICATION_PATH.ROOT).filter(function (file) {
 
 module.exports = {
 
-    entry: './app/App.js',
+    entry: ['webpack/hot/dev-server','./app/App.js'],
     // entry: files,
 
     output: {
@@ -37,16 +39,22 @@ module.exports = {
     devServer: {
         inline: true,
         hot:true,
-        port:9090
+        port:9090,
+        // contentBase:"/public",
+        publicPath:"/build"
     },
 
     module:{
         loaders:[
-            { test:/\.jsx?$/,include:APPLICATION_PATH.ROOT, query: { presets: ['es2015', 'react'] },loader:'babel'},
+            // { test:/\.jsx?$/,include:APPLICATION_PATH.ROOT,loaders: 'babel',query: { presets: ['es2015', 'react'] }},
+            { test:/\.jsx?$/,include:APPLICATION_PATH.ROOT,loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react']},
             { test: /\.css$/, loader: "style-loader!css-loader" }
         ]
-    }
+    },
+
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
 
 };
 
-// export default webpackConfig;

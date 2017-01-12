@@ -1,11 +1,11 @@
 /**
  * Created by jet on 12/27/16.
  */
-import React from 'react';
+import React,{Component,PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
 
-class CheckList extends React.Component{
+class CheckList extends Component{
     render(){
         let tasks = this.props.tasks.map((task)=>{
           return  <li className="checklist_task">
@@ -24,6 +24,11 @@ class CheckList extends React.Component{
             );
     }
 }
+
+CheckList.propTypes ={
+    id: PropTypes.number,
+    tasks: PropTypes.arrayOf(Object)
+};
 
 export default CheckList;
 

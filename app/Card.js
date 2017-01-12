@@ -2,13 +2,26 @@
  * Created by jet on 12/27/16.
  */
 
-import React from 'react';
+import React,{ Component,PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import CheckList from './CheckList';
 import marked from 'marked';
 import style from "../css/app.css";
 
-class Card extends React.Component{
+//Customr proptype validator
+
+let titlePropType = (props,propName,componentName)=>{
+    if(props[propName]){
+        let value = props[propName]
+        if(typeof  value !=='string' || value.length > 80){
+            return new Error(
+                `${propName} in ${componentName} is longer than 80 characters`
+            );
+        }
+    }
+};
+
+class Card extends Component{
 
     // render(){
     //     return(
@@ -66,5 +79,15 @@ class Card extends React.Component{
         );
     }
 }
+
+Card.propTypes = {
+    id: PropTypes.number,
+    // title: PropTypes.string,
+    title: titlePropType,
+    description: PropTypes.string,
+    color: PropTypes.string,
+    tasks: PropTypes.arrayOf(PropTypes.object)
+};
+
 
 export default Card;

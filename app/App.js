@@ -37,7 +37,17 @@ let cardsList = [{
             done: false
         }
     ]
-}
+},
+    {
+        id: 3,
+        title: "This is a new card with a very long",
+        title1: "This is a new card with a very,very long title,thus having more than 80 characters",
+        description: "Code along with the samples in the book. The complete source can be found at [github](https://github.com/pro-react)",
+        color: '#FF0000',
+        status: "done",
+        tasks: [
+        ]
+    }
 ];
 
 
