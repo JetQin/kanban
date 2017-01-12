@@ -6,7 +6,7 @@ import React,{ Component,PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import CheckList from './CheckList';
 import marked from 'marked';
-import style from "../css/app.css";
+import style from "../../css/app.css";
 
 //Customr proptype validator
 
