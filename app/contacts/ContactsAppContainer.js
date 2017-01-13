@@ -15,12 +15,13 @@ class ContactsAppContainer extends Component{
 
     componentDidMount(){
         fetch('../../public/contacts.json')
-            .then((response)  => response.json())
+            .then((response) => response.json())
             .then((responseData) =>{
+                console.log(responseData);
                 this.setState({contacts: responseData});
             }).catch((error) => {
-            console.log('Error fetching and parsing data',error);
-        });
+                console.log('Error fetching and parsing data',error);
+            });
     }
     render(){
         return <ContactsApp contacts={this.state.contacts} />

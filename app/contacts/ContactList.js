@@ -10,7 +10,7 @@ class ContactList extends Component{
 
     render(){
         let filterContacts = this.props.contacts.filter(
-            (contact) => contact.name.indexOf(this.props.filterText) !== -1
+            (contact) => contact.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
         );
         return(
             <ul>
