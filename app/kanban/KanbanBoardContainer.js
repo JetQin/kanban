@@ -26,7 +26,8 @@ class KanbanBoardContainer extends Component{
     };
 
     componentDidMount(){
-        fetch(API_URL+'/cards',{headers:API_HEADERS})
+        // fetch(API_URL+'/cards',{headers:API_HEADERS})
+        fetch('../../public/todo.json',{headers:API_HEADERS})
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({cards:responseData})
@@ -55,8 +56,13 @@ class KanbanBoardContainer extends Component{
             method: 'post',
             headers: API_HEADERS,
             body: JSON.stringify(newTask)
-        }).then((response) => response.json())
-            .then((responseData) => {
+        }).then((response) => {
+            if(response.ok){
+                return response.json()
+            } else {
+                throw new Error("Server response wasn't OK")
+            }
+        }).then((responseData) => {
         // When the server returns the definitive ID
         // used for the new Task on the server, update it on React
                 newTask.id=responseData.id
@@ -69,7 +75,7 @@ class KanbanBoardContainer extends Component{
         let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
 
         //Create a new object without the task
-        let nextState = update(this.state.cards,{[cardIndex]:{tasks:{$splice:[taskIndex,1]}}})
+        let nextState = update(this.state.cards,{[cardIndex]:{tasks:{$splice:[[taskIndex,1]]}}})
         this.setState({cards:nextState});
         fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`,{
             method:'delete',

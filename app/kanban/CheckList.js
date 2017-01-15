@@ -8,9 +8,12 @@ import ReactDOM from 'react-dom';
 
 class CheckList extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.checkInputKeyPress = this.checkInputKeyPress.bind(this);
+        this.deleteTask = this.deleteTask.bind(this);
+        this.toggleTask = this.toggleTask.bind(this);
+
     }
 
     checkInputKeyPress(evt){
@@ -21,13 +24,20 @@ class CheckList extends Component{
         }
     }
 
+    toggleTask(cardId,taskId,taskIndex){
+        this.props.taskCallbacks.toggle(cardId,taskId,taskIndex)
+    }
+
+    deleteTask(cardId,taskId,taskIndex){
+        this.props.taskCallbacks.delete(cardId,taskId,taskIndex)
+    }
+
     render(){
         let tasks = this.props.tasks.map((task,taskIndex)=>{
           return  <li className="checklist_task" key={task.id}>
-                        <input key={task.id} type="checkbox" defaultChecked={task.done}
-                            onChange={this.props.taskCallbacks.toggle.bind(null,this.props.cardId,task.id,taskIndex)}/>
+                        <input key={task.id} type="checkbox" defaultChecked={task.done} onChange={this.toggleTask.bind(null,this.props.cardId,task.id,taskIndex)}/>
                         {task.name}
-              <a href="#" className="checklist_task_remove" onClick={this.props.taskCallbacks.delete.bind(null,this.props.cardId,task.id,taskIndex)}>Remove</a>
+                        <a href="#" className="checklist_task_remove" onClick={this.deleteTask.bind(null,this.props.cardId,task.id,taskIndex)}>Remove</a>
                  </li>
         });
 
@@ -43,7 +53,7 @@ class CheckList extends Component{
 }
 
 CheckList.propTypes ={
-    id: PropTypes.number,
+    cardId: PropTypes.number,
     tasks: PropTypes.arrayOf(Object),
     taskCallbacks: PropTypes.object
 };

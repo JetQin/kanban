@@ -8,6 +8,7 @@ import KanbanBoard from './kanban/KanbanBoard';
 import ContactsApp from "./contacts/ContactsApp";
 import ContactsAppContainer from "./contacts/ContactsAppContainer";
 import KanbanBoardContainer from "./kanban/KanbanBoardContainer";
+import AnimatedShoppingList from "./shoppingcart/AnimatedShoppingList";
 import style from "../css/app.css";
 
 let cardsList = [{
@@ -65,5 +66,6 @@ let contacts = [
 
 // ReactDOM.render(<KanbanBoard cards={cardsList}/>, document.getElementById("root"));
 // ReactDOM.render(<ContactsApp contacts={contacts}/>, document.getElementById("root"));
-ReactDOM.render(<KanbanBoardContainer />, document.getElementById("root"));
+// ReactDOM.render(<KanbanBoardContainer />, document.getElementById("root"));
 // ReactDOM.render(<ContactsAppContainer />, document.getElementById("root"));
+ReactDOM.render(<AnimatedShoppingList />, document.getElementById("root"));
