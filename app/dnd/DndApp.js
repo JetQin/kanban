@@ -4,6 +4,8 @@
 
 import React ,{ PropTypes, Component } from 'react';
 import ReactDOM from 'react-dom';
+import Container from './Container';
+import style from './style.css';
 
 class DndApp extends Component{
 

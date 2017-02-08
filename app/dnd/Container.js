@@ -5,6 +5,11 @@
 import React ,{ PropTypes, Component } from 'react';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Snack from './Snack';
+import ShoppingCart from './ShoppingCart';
+
+
+let items = ['Popcorn','Bread'];
 
 class Container extends Component{
 
@@ -16,6 +21,7 @@ class Container extends Component{
                 <Snack name="Donut"/>
                 <Snack name="Doritos"/>
                 <Snack name="Popcorn"/>
+                <ShoppingCart items={items}/>
             </div>
         );
     }

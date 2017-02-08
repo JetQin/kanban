@@ -9,6 +9,7 @@ import ContactsApp from "./contacts/ContactsApp";
 import ContactsAppContainer from "./contacts/ContactsAppContainer";
 import KanbanBoardContainer from "./kanban/KanbanBoardContainer";
 import AnimatedShoppingList from "./shoppingcart/AnimatedShoppingList";
+import DndApp from './dnd/DndApp';
 import style from "../css/app.css";
 
 let cardsList = [{
@@ -68,4 +69,5 @@ let contacts = [
 // ReactDOM.render(<ContactsApp contacts={contacts}/>, document.getElementById("root"));
 // ReactDOM.render(<KanbanBoardContainer />, document.getElementById("root"));
 // ReactDOM.render(<ContactsAppContainer />, document.getElementById("root"));
-ReactDOM.render(<AnimatedShoppingList />, document.getElementById("root"));
+// ReactDOM.render(<AnimatedShoppingList />, document.getElementById("root"));
+ReactDOM.render(<DndApp />, document.getElementById("root"));

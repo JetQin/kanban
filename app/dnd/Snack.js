@@ -5,8 +5,9 @@
 import React ,{ PropTypes, Component } from 'react';
 import ReactDOM from 'react-dom';
 import {DragSource} from 'react-dnd';
+import constants from './constants';
 
-const  snackSpec = {
+const snackSpec = {
 
     beginDrag(props){
 
@@ -20,30 +21,43 @@ const  snackSpec = {
         const dropResult = monitor.getDropResult();
 
         if(dropResult){
-            console.log('You dropped ${dragItem.name} into ${dropResult.name}');
+            console.log(`You dropped ${dragItem.name} into ${dropResult.name}`);
         }
     }
 };
 
+let collect = (connect,monitor) => {
+    return {
+        connectDragSource : connect.dragSource(),
+        isDragging: monitor.isDragging()
+    }
+}
+
 class Snack extends Component{
 
-    const { name } = this.props;
-
-    const style = {
-        opacity:1
-    };
-
     render(){
+
+        const { name , isDragging, connectDragSource } = this.props;
+        const opacity = isDragging ? 0.4 : 1;
+
+        const style = {
+            opacity:opacity
+        };
+
         return(
-            <div className="snack" style={style}>
-                {name}
-            </div>
-        )
+            connectDragSource(
+                <div className="snack" style={style}>
+                    {name}
+                </div>
+            )
+        );
     }
 }
 
 Snack.propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
     name : PropTypes.string.isRequired
 };
 
-export default Snack;
+export default DragSource(constants.SNACK,snackSpec,collect)(Snack);
