@@ -3,7 +3,6 @@
  */
 
 import React ,{ PropTypes, Component } from 'react';
-import ReactDOM from 'react-dom';
 import {DropTarget} from 'react-dnd';
 
 const ShoppingCartSpec = {
