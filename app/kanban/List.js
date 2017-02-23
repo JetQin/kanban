@@ -2,17 +2,34 @@
  * Created by jet on 12/27/16.
  */
 import React,{Component,PropTypes} from 'react';
+import { DropTarget } from 'react-dnd';
 import ReactDOM from 'react-dom';
 import Card from './Card';
+import constants from './constants';
+
+const listTargetSpec = {
+    hover(props,monitor){
+        const draggedId = monitor.getItem().id;
+        props.cardCallbacks.updateStatus(draggedId,props.id);
+    }
+};
+
+function collect(connect,monitor){
+    return{
+        connectDropTarget:connect.dropTarget()
+    };
+}
 
 class List extends Component{
 
     render(){
+        const { connectDropTarget } = this.props;
+
         var cards = this.props.cards.map((card) => {
-                return <Card key={card.id} id={card.id} title={card.title} description={card.description} color={card.color} tasks={card.tasks} taskCallbacks={this.props.taskCallbacks}/>
+                return <Card key={card.id} id={card.id} title={card.title} description={card.description} color={card.color} tasks={card.tasks} taskCallbacks={this.props.taskCallbacks} cardCallbacks={this.props.cardCallbacks} />
             });
 
-        return (
+        return connectDropTarget(
             <div className="list"> <h1>{this.props.title}</h1>{cards}</div>
         );
     }
@@ -21,7 +38,9 @@ class List extends Component{
 List.propTypes = {
     title: PropTypes.string.isRequired,
     cards: PropTypes.arrayOf(PropTypes.object),
-    taskCallbacks: PropTypes.object
+    taskCallbacks: PropTypes.object,
+    cardCallbacks: PropTypes.object,
+    connectDropTarget: PropTypes.func.isRequired
 };
 
-export default List;
+export default DropTarget(constants.CARD,listTargetSpec,collect)(List);

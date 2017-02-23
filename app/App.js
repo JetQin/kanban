@@ -67,7 +67,7 @@ let contacts = [
 
 // ReactDOM.render(<KanbanBoard cards={cardsList}/>, document.getElementById("root"));
 // ReactDOM.render(<ContactsApp contacts={contacts}/>, document.getElementById("root"));
-// ReactDOM.render(<KanbanBoardContainer />, document.getElementById("root"));
+ReactDOM.render(<KanbanBoardContainer />, document.getElementById("root"));
 // ReactDOM.render(<ContactsAppContainer />, document.getElementById("root"));
 // ReactDOM.render(<AnimatedShoppingList />, document.getElementById("root"));
-ReactDOM.render(<DndApp />, document.getElementById("root"));
+// ReactDOM.render(<DndApp />, document.getElementById("root"));
