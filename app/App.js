@@ -10,6 +10,8 @@ import ContactsAppContainer from "./contacts/ContactsAppContainer";
 import KanbanBoardContainer from "./kanban/KanbanBoardContainer";
 import AnimatedShoppingList from "./shoppingcart/AnimatedShoppingList";
 import DndApp from './dnd/DndApp';
+import RouteApp from './routes/index';
+import ReactRouteApp from './routes/RouteIndexContainer';
 import style from "../css/app.css";
 
 let cardsList = [{
@@ -67,7 +69,9 @@ let contacts = [
 
 // ReactDOM.render(<KanbanBoard cards={cardsList}/>, document.getElementById("root"));
 // ReactDOM.render(<ContactsApp contacts={contacts}/>, document.getElementById("root"));
-ReactDOM.render(<KanbanBoardContainer />, document.getElementById("root"));
+// ReactDOM.render(<KanbanBoardContainer />, document.getElementById("root"));
 // ReactDOM.render(<ContactsAppContainer />, document.getElementById("root"));
 // ReactDOM.render(<AnimatedShoppingList />, document.getElementById("root"));
 // ReactDOM.render(<DndApp />, document.getElementById("root"));
+// ReactDOM.render(<RouteApp />, document.getElementById("root"));
+ReactDOM.render(<ReactRouteApp/>, document.getElementById("root"));
