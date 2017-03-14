@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link } from 'react-router';
+import { Router, Route, IndexRoute,Link } from 'react-router';
 
 import Home from './Home';
 import About from './About';
@@ -22,5 +22,4 @@ class ReactRoute extends Component {
         );
     }
 }
-
 export default ReactRoute;

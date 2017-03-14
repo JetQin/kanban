@@ -10,9 +10,13 @@ import ContactsAppContainer from "./contacts/ContactsAppContainer";
 import KanbanBoardContainer from "./kanban/KanbanBoardContainer";
 import AnimatedShoppingList from "./shoppingcart/AnimatedShoppingList";
 import DndApp from './dnd/DndApp';
-import RouteApp from './routes/index';
+import IndexApp from './routes/index';
 import ReactRouteApp from './routes/RouteIndexContainer';
 import style from "../css/app.css";
+
+
+
+
 
 let cardsList = [{
     id: 1,

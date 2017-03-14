@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link } from 'react-router';
+import { Router, Route,hashHistory,browserHistory,IndexRoute, Link } from 'react-router';
 
 import RouteApp from './RouteIndex';
 
@@ -11,11 +11,15 @@ import Repos from './Repos';
 class ReactRoute extends Component {
     render() {
         return (
-            <Router>
-                <Route path="/" component={RouteApp}/>    
-                <Route path="about" component={About}/>    
-                <Route path="repos" component={Repos}/>    
+          <div>
+            <Router history={hashHistory} >
+                <Route path="/" component={RouteApp}>    
+                    <IndexRoute component={Home}/>    
+                    <Route path="about" component={About}/>    
+                    <Route path="repos" component={Repos}/>    
+                </Route>
             </Router>
+         </div>
         );
     }
 }
