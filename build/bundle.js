@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3db5c6828f71f339dc7f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "61433fea2666106279fb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -739,20 +739,6 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _reactRouter = __webpack_require__(790);
-
-	var _Home = __webpack_require__(786);
-
-	var _Home2 = _interopRequireDefault(_Home);
-
-	var _About = __webpack_require__(784);
-
-	var _About2 = _interopRequireDefault(_About);
-
-	var _Repos = __webpack_require__(785);
-
-	var _Repos2 = _interopRequireDefault(_Repos);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var cardsList = [{
@@ -802,14 +788,7 @@
 	// ReactDOM.render(<AnimatedShoppingList />, document.getElementById("root"));
 	// ReactDOM.render(<DndApp />, document.getElementById("root"));
 	// ReactDOM.render(<RouteApp />, document.getElementById("root"));
-	_reactDom2.default.render(_react2.default.createElement(
-	    _reactRouter.Router,
-	    { history: _reactRouter.browserHistory },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _index2.default }),
-	    _react2.default.createElement(_reactRouter.IndexRoute, { Component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _About2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'repos', component: _Repos2.default })
-	), document.getElementById("root"));
+	_reactDom2.default.render(_react2.default.createElement(_RouteIndexContainer2.default, null), document.getElementById("root"));
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(444); if (makeExportsHot(module, __webpack_require__(106))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "App.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
@@ -47985,6 +47964,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	__webpack_require__(472);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47999,16 +47980,46 @@
 	    function Repos() {
 	        _classCallCheck(this, Repos);
 
-	        return _possibleConstructorReturn(this, (Repos.__proto__ || Object.getPrototypeOf(Repos)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Repos.__proto__ || Object.getPrototypeOf(Repos)).apply(this, arguments));
+
+	        _this.state = { repositories: [] };
+	        return _this;
 	    }
 
 	    _createClass(Repos, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            fetch('https://api.github.com/users/pro-react/repos').then(function (response) {
+	                return reponse.json();
+	            }).then(function (responseData) {
+	                _this2.setState({ repositories: responseData });
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var repos = this.state.repositories.map(function (repo) {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { key: repo.id },
+	                    repo.name
+	                );
+	            });
 	            return _react2.default.createElement(
-	                'h1',
+	                'div',
 	                null,
-	                'Github Repos'
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    'Github Repos'
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    repos
+	                )
 	            );
 	        }
 	    }]);
@@ -48176,12 +48187,19 @@
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                _reactRouter.Router,
+	                'div',
 	                null,
-	                _react2.default.createElement(_reactRouter.Route, { path: '/', component: _RouteIndex2.default }),
-	                _react2.default.createElement(_reactRouter.IndexRoute, { Component: _Home2.default }),
-	                _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _About2.default }),
-	                _react2.default.createElement(_reactRouter.Route, { path: 'repos', component: _Repos2.default })
+	                _react2.default.createElement(
+	                    _reactRouter.Router,
+	                    { history: _reactRouter.hashHistory },
+	                    _react2.default.createElement(
+	                        _reactRouter.Route,
+	                        { path: '/', component: _RouteIndex2.default },
+	                        _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	                        _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _About2.default }),
+	                        _react2.default.createElement(_reactRouter.Route, { path: 'repos', component: _Repos2.default })
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -53383,7 +53401,7 @@
 	    _createClass(ReactRoute, [{
 	        key: 'render',
 	        value: function render() {
-	            var nav = _react2.default.createElement(
+	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
