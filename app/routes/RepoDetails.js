@@ -28,7 +28,7 @@ class RepoDetails extends Component {
     render() {
         let stars = [];
         for (var index = 0; index < this.state.repository.stargazers_count; index++) {
-            stars.push('🌟');
+            stars.push('🌟git');
         }
         return (
             <div>
